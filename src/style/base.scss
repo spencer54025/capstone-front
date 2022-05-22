@@ -1,0 +1,16 @@
+body {
+    margin: 0px;
+}
+
+.app {
+    height: 100vh;
+    width: 100vw;
+    margin: none;
+    background-color: $background-dark;
+    color: $font-color;
+}
+
+.homepage-wrapper {
+    height: 200px;
+    width: 100%;
+}

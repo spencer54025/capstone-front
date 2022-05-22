@@ -1,0 +1,42 @@
+.contact-wrapper {
+    height: calc(100vh - 100px);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    font-size: 3em;
+
+    .left-side {
+        height: 100%;
+        width: 100%;
+    
+        img {
+            height: 100%;
+            width: 100%;
+        }
+    }
+
+    .right-side {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        
+        .info-wrapper {
+            padding-bottom: 30px;
+        }
+
+        a {
+            text-decoration: none;
+            color: $font-color;
+            transition: .8s ease-in-out;
+
+            &:hover {
+                color: $dark-font;
+            }
+        }
+    }
+    svg {
+        padding-right: 32px;
+    }
+}

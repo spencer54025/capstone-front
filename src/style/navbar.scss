@@ -1,0 +1,38 @@
+.nav-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100px;
+    width: 100%;
+    .free-shipping-banner {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.2em;
+        height: 32px;
+        background-color: $dark-font;
+        width: 100%;
+    }
+
+    .nav-link{
+        display: flex;
+    }
+
+    .link-wrapper {
+        padding-top: 10px;
+        display: flex;
+        width: 50%;
+        justify-content: space-evenly;
+        font-size: 1.5em;
+
+        a {
+            color: $font-color;
+            text-decoration: none;
+            transition: .8s ease-in-out;
+
+            &:hover {
+                color: $dark-font;
+            }
+        }
+    }
+}
