@@ -31,7 +31,9 @@ export default class NavBar extends Component {
                     <div className='nav-link'>
                     <NavLink to='/cart'><FontAwesomeIcon icon={faCartShopping} /> </NavLink>
                     <span>{cartItemsNum}</span>
+                    <div>
                      <button onClick={() => this.props.logout()}>logout</button>
+                    </div>
                     </div>
                      :
                      <div className='nav-link'>
@@ -41,6 +43,13 @@ export default class NavBar extends Component {
                         <NavLink className='cart' to='/cart'><FontAwesomeIcon icon={faCartShopping} /> </NavLink>
                         <span>{cartItemsNum}</span>
                      </div>
+                    }
+                    {this.props.userType === 'admin' ?
+                    <div className='nav-link'>
+                        <NavLink to='/add-book'>add book </NavLink>
+                    </div>
+                    :
+                    null
                     }
                 </div>
             </div>

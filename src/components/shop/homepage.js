@@ -12,6 +12,8 @@ export default class HomePage extends Component {
         this.getBooks = this.getBooks.bind(this)
     }
 
+
+
     componentDidMount() {
         this.getBooks()
         console.log(this.props.userType)
@@ -50,12 +52,6 @@ export default class HomePage extends Component {
         return (
             <div className='homepage-wrapper'>
                 {this.mapBooks()}
-
-                {this.props.userType === 'admin' ?
-                <button onClick={() => this.addBook()}>add a new book</button>
-                :
-                null
-                }
             </div>
         )
     }

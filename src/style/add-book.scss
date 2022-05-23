@@ -1,0 +1,33 @@
+.form-wrapper {
+    height: calc(100vh - 100px);
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+
+    input {
+        width: 25%;
+        height: 32px;
+        color: inherit;
+        background-color: inherit;
+        font-size: 1.5em;
+        border: 2px solid transparent;
+        border-bottom: 2px solid $dark-font;
+
+        &:focus{
+            outline: 2px solid $dark-font;
+        }
+    }
+
+    textarea {
+        width: 45%;
+        height: 175px;
+        background-color: inherit;
+        color: inherit;
+        font-size: 1.5em;
+        border: 2px solid $dark-font;
+        outline: none;
+    }
+}

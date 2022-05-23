@@ -6,6 +6,7 @@ import NavBar from './navbar/navbar'
 import Contact from './contact'
 import BookDetail from './shop/book-detail'
 import Cart from './shop/cart'
+import AddBook from './admin-pages/add-book'
 
 export default class App extends Component {
   constructor(props){
@@ -58,11 +59,9 @@ export default class App extends Component {
     return (
       <div className='app'>
         <Router>
-          <NavBar logout={this.logout} cart={this.state.cart} loggedInStatus={this.state.loggedInStatus} />
+          <NavBar logout={this.logout} cart={this.state.cart} userType={this.state.userType} loggedInStatus={this.state.loggedInStatus} />
             <Switch>
-              <Route exact path="/" render={props => (
-                <HomePage {...props} userType={this.state.userType} />
-              )} />
+              <Route exact path='/' component={HomePage} />
 
               <Route
                 path='/login'
@@ -81,6 +80,7 @@ export default class App extends Component {
                 <Cart {...props} cart={this.state.cart} removeItem={this.removeFromCart}/>
               )} />
               
+              <Route path='/add-book' component={AddBook} />
               
             </Switch>
         </Router>
