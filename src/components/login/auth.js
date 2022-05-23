@@ -8,18 +8,47 @@ export default class Login extends Component {
         this.state = {
             username1: "",
             username2: "",
+            username3: "",
             password1: "",
             password2: "",
+            password3: "",
             message: "",
-            email: ''
+            email: '',
+            email2: ''
         }
 
         this.handleChange = this.handleChange.bind(this)
         this.handleLogin = this.handleLogin.bind(this)
         this.createAccount = this.createAccount.bind(this)
+        this.updatePassword = this.updatePassword.bind(this)
     }
 
-    
+    updatePassword(event) {
+        axios.put(`http://127.0.0.1:5000/user/update/${this.state.username3}/${this.state.email2}`, {
+            password: this.state.password3
+        })
+        .then(res => {
+            if(res.data[1] === 'user was updated')
+            this.setState({
+                message: 'password was updated',
+                password3: '',
+                email2: '',
+                username3: ''
+            })
+            else{
+                this.setState({
+                    message: 'couldnt find that user',
+                    password3: '',
+                    email2: '',
+                    username3: ''
+                })
+            }
+        })
+        .catch(err => {
+            console.log(err)
+        })
+        event.preventDefault()
+    }
 
 
     createAccount(event) {
@@ -61,6 +90,11 @@ export default class Login extends Component {
     }
 
     handleLogin(event) {
+        {this.state.username1 === '' && this.state.password1 === '' ? 
+        this.setState({
+            message: 'please enter your credentials'
+        })
+        : 
         axios({
             method: 'post',
             url: 'http://127.0.0.1:5000/user/verify',
@@ -92,6 +126,7 @@ export default class Login extends Component {
         })
         event.preventDefault()
     }
+    }
 
 
     render(){
@@ -108,6 +143,7 @@ export default class Login extends Component {
                         </form>
                     </div>
                     <div className="right-side">
+                    {this.state.message !== 'Failed to login, please try again' || this.state.message !== "couldnt find that user" ?
                         <form onSubmit={this.createAccount}>
                             <h1>Create Account</h1>
                             <input onChange={this.handleChange} type="username" name='username2' placeholder='username' value={this.state.username2} />
@@ -115,6 +151,15 @@ export default class Login extends Component {
                             <input onChange={this.handleChange} type="email" name='email' placeholder='email' value={this.state.email} />
                             <button type='submit'>Create Account</button>
                         </form>
+                    :
+                    <form onSubmit={this.updatePassword}>
+                        <h1>Reset Password</h1>
+                        <input onChange={this.handleChange} type="username" name='username3' placeholder='username' value={this.state.username3} />
+                        <input onChange={this.handleChange} type="email" name='email2' placeholder='email' value={this.state.email2} />
+                        <input onChange={this.handleChange} type="password" name='password3' placeholder='new password' value={this.state.password3} />
+                        <button type='submit'>Update Password</button>
+                    </form>
+                    }
                     </div>
                 </div>
             </div>
