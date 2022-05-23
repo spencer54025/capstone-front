@@ -24,6 +24,7 @@ export default class App extends Component {
     this.logout = this.logout.bind(this)
   }
 
+
   removeFromCart(book) {
     console.log(book)
     this.setState({

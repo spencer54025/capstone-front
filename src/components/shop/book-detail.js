@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Alert from 'react-popup-alert'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
 export default class BookDetail extends Component {
     constructor(props){
@@ -16,7 +18,19 @@ export default class BookDetail extends Component {
         this.getBook = this.getBook.bind(this)
         this.onCloseAlert = this.onCloseAlert.bind(this)
         this.addToCart = this.addToCart.bind(this)
+        this.deleteBook = this.deleteBook.bind(this)
+
     }
+
+    deleteBook(id){
+        axios.delete(`http://127.0.0.1:5000/book/delete/${id}`)
+        .then(
+            this.props.history.push('/')
+        )
+        .catch(err => {
+            console.log(error)
+        })
+    }  
 
     addToCart(book){
         if(this.props.cart.includes(book)){
@@ -74,7 +88,16 @@ export default class BookDetail extends Component {
 
         return (
             <div className='book-detail-wrapper'>
+                {this.props.userType === 'admin' ?
+                <div>
+                    <h1>{title}</h1>
+                    <button onClick={() => this.deleteBook(this.state.book.id)}>
+                    <FontAwesomeIcon icon={faTrash} />
+                    </button>
+                </div>
+                :
                 <h1>{title}</h1>
+                }
                 <h3>by: {author}</h3>
                 <img src={img} />
                 <h2>${price}</h2>
