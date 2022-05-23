@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Alert from 'react-popup-alert'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons'
 
 export default class BookDetail extends Component {
     constructor(props){
@@ -11,7 +11,14 @@ export default class BookDetail extends Component {
         this.state ={
             book: {},
             setAlert: false,
-            header: "added to cart"
+            header: "added to cart",
+            editMode: false,
+            title: '',
+            author: '',
+            genre: '',
+            price: '',
+            summary: '',
+            img: ''
         }
 
 
@@ -19,8 +26,60 @@ export default class BookDetail extends Component {
         this.onCloseAlert = this.onCloseAlert.bind(this)
         this.addToCart = this.addToCart.bind(this)
         this.deleteBook = this.deleteBook.bind(this)
-
+        this.saveEdit = this.saveEdit.bind(this)
+        this.changeToEdit = this.changeToEdit.bind(this)
+        this.handleChange = this.handleChange.bind(this)
     }
+
+    handleChange(event) {
+        this.setState({
+            [event.target.name]: event.target.value,
+        })
+    }
+
+    changeToEdit() {
+        this.setState({
+            editMode: true,
+            title: this.state.book.title,
+            author: this.state.book.author,
+            genre: this.state.book.genre,
+            price: this.state.book.price,
+            summary: this.state.book.summary,
+            img: this.state.book.img
+        })
+    }
+
+    saveEdit(event){
+        axios({
+            method: 'PUT',
+            url: `http://127.0.0.1:5000/update/book/${this.state.book.id}`,
+            data: {
+                title: this.state.title,
+                summary: this.state.summary,
+                author: this.state.author,
+                price: this.state.price,
+                genre: this.state.genre,
+                img: this.state.img,
+            }
+        })
+        .then(res => {
+            console.log(res)
+            this.setState({
+                editMode: false,
+                title: this.state.title,
+                author: this.state.author,
+                genre: this.state.genre,
+                price: this.state.price,
+                summary: this.state.summary,
+                img: this.state.img
+            })
+        })
+        .catch(err => {
+            console.log(err)
+        })
+        event.preventDefault()
+    }
+
 
     deleteBook(id){
         axios.delete(`http://127.0.0.1:5000/book/delete/${id}`)
@@ -88,11 +147,16 @@ export default class BookDetail extends Component {
 
         return (
             <div className='book-detail-wrapper'>
+            {this.state.editMode === false ?
+                <div>
                 {this.props.userType === 'admin' ?
                 <div>
                     <h1>{title}</h1>
                     <button onClick={() => this.deleteBook(this.state.book.id)}>
                     <FontAwesomeIcon icon={faTrash} />
+                    </button>
+                    <button onClick={() => this.changeToEdit()}>
+                        <FontAwesomeIcon icon={faEdit} />
                     </button>
                 </div>
                 :
@@ -116,8 +180,21 @@ export default class BookDetail extends Component {
                     onClosePress={() => this.onCloseAlert()}                
                 />
                 </div>
-
-            </div>    
+                </div>
+                :
+                <div>
+                    <form onSubmit={this.saveEdit} className='form-wrapper'>
+                        <input type="text" name='title' placeholder='Title' value={this.state.title} onChange={this.handleChange} />
+                        <input type="text" name='author' placeholder='Author' value={this.state.author} onChange={this.handleChange} />
+                        <input type="text" name='genre' placeholder='Genre' value={this.state.genre} onChange={this.handleChange} />
+                        <input type="text" name='price' placeholder='Price' value={this.state.price} onChange={this.handleChange} />
+                        <input type="text" name='img' placeholder='Image URL' value={this.state.img} onChange={this.handleChange} />
+                        <textarea type='text' placeholder='Summary' name="summary" value={this.state.summary} onChange={this.handleChange}></textarea>
+                        <button className='btn'>Save</button>
+                    </form>
+                </div>
+                }
+            </div>
         )
     }
 
