@@ -91,14 +91,7 @@ export default class BookDetail extends Component {
     }  
 
     addToCart(book){
-        if(this.props.cart.includes(book)){
-            this.setState({
-                header: 'that is already in your cart'
-            })
-        }
-        else{
-            this.props.addToCart(book)
-        }
+        this.props.addToCart(book)
     }
 
     onCloseAlert() {
@@ -109,8 +102,7 @@ export default class BookDetail extends Component {
 
     openAlert(){
         this.setState({
-            text: 'Added to Cart',
-            setAlert: true,
+            setAlert: true
         })
     }
     
@@ -145,9 +137,9 @@ export default class BookDetail extends Component {
 
 
         return (
-            <div className='book-detail-wrapper'>
+            <div >
             {this.state.editMode === false ?
-                <div>
+                <div className='book-detail-wrapper'>
                 {this.props.userType === 'admin' ?
                 <div>
                     <h1>{title}</h1>
@@ -170,7 +162,9 @@ export default class BookDetail extends Component {
                 }
                 >add to cart</button>
                 <h2>{genre}</h2>
-                <span>{summary}</span>
+                <div className='summary-wrapper'>
+                    <span>{summary}</span>
+                </div>
                 <div>
                 <Alert 
                     header={this.state.header}

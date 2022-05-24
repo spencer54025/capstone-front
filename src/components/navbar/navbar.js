@@ -29,17 +29,17 @@ export default class NavBar extends Component {
                     
                     {this.props.loggedInStatus === "logged_in" ?
                     <div className='nav-link'>
-                    <NavLink to='/cart'><FontAwesomeIcon icon={faCartShopping} /> </NavLink>
-                    <span>{cartItemsNum}</span>
-                    <div>
-                     <button onClick={() => this.props.logout()}>logout</button>
-                    </div>
+                        <NavLink className='cart' to='/cart'><FontAwesomeIcon icon={faCartShopping} /> </NavLink>
+                        <span>{cartItemsNum}</span>
+                        <div>
+                            <button onClick={() => this.props.logout()}>logout</button>
+                        </div>
                     </div>
                      :
                      <div className='nav-link'>
-                     <div >
-                        <NavLink to='/login'>login/signup</NavLink>
-                     </div>
+                        <div>
+                            <NavLink to='/login'>login/signup</NavLink>
+                        </div>
                         <NavLink className='cart' to='/cart'><FontAwesomeIcon icon={faCartShopping} /> </NavLink>
                         <span>{cartItemsNum}</span>
                      </div>

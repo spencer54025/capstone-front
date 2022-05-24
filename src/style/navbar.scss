@@ -4,6 +4,11 @@
     align-items: center;
     height: 100px;
     width: 100%;
+
+    .cart {
+        padding-left: 25px;
+    }
+
     .free-shipping-banner {
         display: flex;
         justify-content: center;
@@ -24,6 +29,16 @@
         width: 50%;
         justify-content: space-evenly;
         font-size: 1.5em;
+        align-items: center;
+
+        button {
+            position: relative;
+            left: 100%;
+            font-size: inherit;
+            background-color: inherit;
+            color: inherit;
+            border: none;
+        }
 
         a {
             color: $font-color;
