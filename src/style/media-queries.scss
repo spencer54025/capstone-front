@@ -1,0 +1,25 @@
+@media (max-width: 1000px){
+    .homepage-wrapper {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+
+    .contact-wrapper{
+        grid-template-columns: 1fr;
+        
+        .left-side{
+            width: 0px;
+        }
+    }
+}
+
+@media (max-width: 800px){
+    .homepage-wrapper {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .homepage-wrapper {
+        grid-template-columns: 1fr 1fr;
+    }
+}

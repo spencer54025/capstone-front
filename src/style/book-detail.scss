@@ -1,17 +1,20 @@
-.book-detail-wrapper{
+.single-book-wrapper{
     width: 100%;
     height: auto;
     min-height: calc(100vh - 100px);
+    background-color: inherit;
+}   
+
+.book-detail-wrapper{
+    width: 100%;
+    height: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;
-    background-color: inherit;
-    
     
     .summary-wrapper {
         text-align: center;
-        width: 30%;
+        width: 70%;
         font-size: 1.3em;
     }
 

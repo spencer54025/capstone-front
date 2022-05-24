@@ -137,7 +137,7 @@ export default class BookDetail extends Component {
 
 
         return (
-            <div >
+            <div className='single-book-wrapper'>
             {this.state.editMode === false ?
                 <div className='book-detail-wrapper'>
                 {this.props.userType === 'admin' ?

@@ -6,11 +6,7 @@ import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
 export default class NavBar extends Component {
     constructor(props){
         super(props)
-
     }
-
-
-
 
     render(){
         const cartItemsNum = this.props.cart.length
@@ -38,7 +34,7 @@ export default class NavBar extends Component {
                      :
                      <div className='nav-link'>
                         <div>
-                            <NavLink to='/login'>login/signup</NavLink>
+                            <NavLink to='/login'>login</NavLink>
                         </div>
                         <NavLink className='cart' to='/cart'><FontAwesomeIcon icon={faCartShopping} /> </NavLink>
                         <span>{cartItemsNum}</span>
