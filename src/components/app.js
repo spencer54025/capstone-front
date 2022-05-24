@@ -26,10 +26,9 @@ export default class App extends Component {
 
 
   removeFromCart(book) {
-    console.log(book)
     this.setState({
       cart: this.state.cart.filter(item => {
-        return item.id !== book.id
+        return item.key !== book.key
       })
     })
   }
@@ -41,7 +40,6 @@ export default class App extends Component {
   }
 
   successfulLogin(user_type) {
-    console.log(user_type)
     this.setState({
       loggedInStatus: "logged_in",
       userType: user_type

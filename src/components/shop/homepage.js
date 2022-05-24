@@ -16,13 +16,11 @@ export default class HomePage extends Component {
 
     componentDidMount() {
         this.getBooks()
-        console.log(this.props.userType)
     }
 
     getBooks() {
         axios.get('http://127.0.0.1:5000/books/get')
         .then(response =>{
-            console.log(response)
             this.setState({
                 books: response.data
             })

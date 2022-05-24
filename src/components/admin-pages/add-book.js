@@ -28,7 +28,6 @@ export default class AddBook extends Component {
             summary: this.state.summary
         })
         .then(res => {
-            console.log(res)
             this.setState({
                 title: '',
                 author: '',

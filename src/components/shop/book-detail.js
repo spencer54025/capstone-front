@@ -63,7 +63,6 @@ export default class BookDetail extends Component {
             }
         })
         .then(res => {
-            console.log(res)
             this.setState({
                 editMode: false,
                 title: this.state.title,
