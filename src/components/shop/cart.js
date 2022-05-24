@@ -35,9 +35,12 @@ export default class Cart extends Component {
             var key = v4()
             cartItem['key'] = key
             return(
-                <div key={cartItem.key}>
+                <div className='cart-item-wrapper' key={cartItem.key}>
+                <div className='title-price-wrapper'>
                     <span>{cartItem.title}</span>
+                    <br></br>
                     <span>{cartItem.price}</span>
+                </div>
                     <button onClick={() => this.props.removeItem(cartItem)}>Remove</button>
                 </div>
             )
@@ -56,10 +59,12 @@ export default class Cart extends Component {
                     {this.mapCartItems()}
                 </div>
                 <div className='right-side'>
-                    <span>subtotal: ${this.state.subTotal.toFixed(2)}</span>
-                    <span>tax: ${tax.toFixed(2)}</span> 
-                    <span>shipping: ${shipping}</span>
-                    <span>total: ${total}</span>
+                    <div className='cart-details-wrapper'>
+                        <span>subtotal: ${this.state.subTotal.toFixed(2)}</span>
+                        <span>tax: ${tax.toFixed(2)}</span> 
+                        <span>shipping: ${shipping}</span>
+                        <span>total: ${total}</span>
+                    </div>
                 </div>
             </div>
         )
