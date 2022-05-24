@@ -8,26 +8,40 @@ export default class Cart extends Component {
 
         this.state = {
             subTotal: 0,
-            cartItemNumber: 0
+            tax: 0,
+            total: 0
         }
 
         this.mapCartItems = this.mapCartItems.bind(this)
-        this.getSubTotal = this.getSubTotal.bind(this)
+        this.getSubTotal = this.getTotal.bind(this)
     }
 
     componentDidMount() {
-        this.getSubTotal()
         this.mapCartItems()
+        this.getTotal()
     }
 
-    getSubTotal() {
+    getTotal() {
         let priceOfBooks = 0
         this.props.cart.forEach(book => {
             priceOfBooks = priceOfBooks + book.price
-        })   
-        this.setState({
-            subTotal: priceOfBooks
         })
+        if(priceOfBooks > 35 || priceOfBooks == 0){   
+            this.setState({
+                subTotal: priceOfBooks,
+                tax: priceOfBooks * .08,
+                shipping: 0,
+                total: (priceOfBooks + (priceOfBooks * .08)).toFixed(2)
+            })
+        }
+        else{
+            this.setState({
+                subTotal: priceOfBooks,
+                tax: priceOfBooks * .08,
+                shipping: 5.99,
+                total: (priceOfBooks + 5.99 + (priceOfBooks * .08)).toFixed(2)
+            })
+        }
     }
 
     mapCartItems() {
@@ -49,10 +63,6 @@ export default class Cart extends Component {
 
 
     render(){
-        const tax = this.state.subTotal * .08
-        var shipping = 0
-        {this.state.subTotal > 35 || this.state.subTotal === 0 ? shipping = 0 : shipping = 5.99}
-        const total = (this.state.subTotal + shipping + tax).toFixed(2)
         return(
             <div className='cart-wrapper'>
                 <div className='left-side'>
@@ -61,9 +71,13 @@ export default class Cart extends Component {
                 <div className='right-side'>
                     <div className='cart-details-wrapper'>
                         <span>subtotal: ${this.state.subTotal.toFixed(2)}</span>
-                        <span>tax: ${tax.toFixed(2)}</span> 
-                        <span>shipping: ${shipping}</span>
-                        <span>total: ${total}</span>
+                        <span>tax: ${this.state.tax.toFixed(2)}</span> 
+                        <span>shipping: ${this.state.shipping}</span>
+                        <span>total: ${this.state.total}</span>
+                    </div>
+
+                    <div className='checkout-wrapper'>
+                        link
                     </div>
                 </div>
             </div>
