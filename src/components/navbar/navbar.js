@@ -37,7 +37,9 @@ export default class NavBar extends Component {
                             <NavLink to='/login'>login</NavLink>
                         </div>
                         <NavLink className='cart' to='/cart'><FontAwesomeIcon icon={faCartShopping} /> </NavLink>
-                        <span>{cartItemsNum}</span>
+                        <div>
+                            <span>{cartItemsNum}</span>
+                        </div>
                      </div>
                     }
                     {this.props.userType === 'admin' ?

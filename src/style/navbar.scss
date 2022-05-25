@@ -5,8 +5,8 @@
     height: 100px;
     width: 100%;
 
-    .cart {
-        padding-left: 25px;
+    .nav-link{
+        justify-content: space-between;
     }
 
     .free-shipping-banner {
@@ -32,8 +32,6 @@
         align-items: center;
 
         button {
-            position: relative;
-            left: 100%;
             font-size: inherit;
             background-color: inherit;
             color: inherit;

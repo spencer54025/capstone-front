@@ -30,4 +30,14 @@
         border: 2px solid $dark-font;
         outline: none;
     }
+
+    button{
+        width: 100px;
+        height: 30px;
+        font-size: inherit;
+        background-color: inherit;
+        color: inherit;
+        border: 2px solid $dark-font;
+        cursor: pointer;
+    }
 }

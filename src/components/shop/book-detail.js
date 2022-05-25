@@ -80,14 +80,15 @@ export default class BookDetail extends Component {
     }
 
 
-    deleteBook(id){
-        axios.delete(`http://127.0.0.1:5000/book/delete/${id}`)
+    deleteBook(book){
+        axios.delete(`http://127.0.0.1:5000/book/delete/${book.id}`)
         .then(
             this.props.history.push('/')
         )
         .catch(err => {
             console.log(error)
         })
+        this.props.removeFromBooks(book)
     }  
 
     addToCart(book){
@@ -150,7 +151,7 @@ export default class BookDetail extends Component {
                 {this.props.userType === 'admin' ?
                 <div>
                     <h1>{title}</h1>
-                    <button onClick={() => this.deleteBook(this.state.book.id)}>
+                    <button onClick={() => this.deleteBook(this.state.book)}>
                     <FontAwesomeIcon icon={faTrash} />
                     </button>
                     <button onClick={() => this.changeToEdit()}>

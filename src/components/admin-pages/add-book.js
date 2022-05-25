@@ -19,6 +19,15 @@ export default class AddBook extends Component {
     }
 
     addBook(event) {
+        let book = {}
+        book.append("title", this.state.title)
+        book.append("title", this.state.author)
+        book.append("title", this.state.genre)
+        book.append("title", this.state.price)
+        book.append("title", this.state.img)
+        book.append("title", this.state.summary)
+        this.props.updateBooks(book)
+        
         axios.post('http://127.0.0.1:5000/book/add', {
             title: this.state.title,
             author: this.state.author,
@@ -36,6 +45,7 @@ export default class AddBook extends Component {
                 summary: '',
                 img: ''
             })
+            return res
         })
         .catch(error => {
             console.log(error)

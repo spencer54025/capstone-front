@@ -18,7 +18,8 @@ export default class App extends Component {
     this.state = {
       loggedInStatus: "not_logged_in",
       cart: [],
-      userType: 'common'
+      userType: 'common',
+      books: []
     }
 
     this.successfulLogin = this.successfulLogin.bind(this)
@@ -26,6 +27,22 @@ export default class App extends Component {
     this.removeFromCart = this.removeFromCart.bind(this)
     this.logout = this.logout.bind(this)
     this.clearCart = this.clearCart.bind(this)
+    this.removeFromBooks = this.removeFromBooks.bind(this)
+    this.updateBooks = this.updateBooks.bind(this)
+  }
+
+  updateBooks(book) {
+    this.setState({
+      books: books.concat(book)
+    })
+  }
+
+  removeFromBooks(book) {
+    this.setState({
+      books: this.state.books.filter(item => {
+        return item.id != book.id
+      })
+    })
   }
 
 
@@ -72,7 +89,9 @@ export default class App extends Component {
         <Router>
           <NavBar logout={this.logout} cart={this.state.cart} userType={this.state.userType} loggedInStatus={this.state.loggedInStatus} />
             <Switch>
-              <Route exact path='/' component={HomePage} />
+              <Route exact path='/' render={props => (
+                <HomePage {...props} books={this.state.books} />
+              )} />
 
               <Route
                 path='/login'
@@ -81,7 +100,7 @@ export default class App extends Component {
                />
 
               <Route path="/book/:slug" render={props => (
-                <BookDetail  {...props} cart={this.state.cart} userType={this.state.userType} loggedInStatus={this.state.loggedInStatus} addToCart={this.addToCart} />
+                <BookDetail  {...props} removeFromBooks={this.removeFromBooks} cart={this.state.cart} userType={this.state.userType} loggedInStatus={this.state.loggedInStatus} addToCart={this.addToCart} />
                 )}
               />
 
@@ -91,7 +110,9 @@ export default class App extends Component {
                 <Cart {...props} cart={this.state.cart} clearCart={this.clearCart} removeItem={this.removeFromCart}/>
               )} />
               
-              <Route path='/add-book' component={AddBook} />
+              <Route path='/add-book' render={props => (
+                <AddBook {...props} updateBooks={this.updateBooks} />
+              )} />
 
               <Route path='/checkout' component={Checkout} />
               

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import axios from 'axios'
 import { Link } from 'react-router-dom'
-import { v4 } from 'uuid'
+import axios from 'axios'
+
 
 
 export default class HomePage extends Component {
@@ -11,13 +11,14 @@ export default class HomePage extends Component {
         this.state = {
             books: []
         }
+
         this.getBooks = this.getBooks.bind(this)
     }
 
     componentDidMount() {
         this.getBooks()
-    }
-
+      }
+    
     getBooks() {
         axios.get('http://127.0.0.1:5000/books/get')
         .then(response =>{
@@ -28,7 +29,8 @@ export default class HomePage extends Component {
         .catch(error =>{
             console.log(error)
         })
-    }
+      }
+
 
     mapBooks() {
         return this.state.books.map(book => {
