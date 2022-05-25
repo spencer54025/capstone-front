@@ -91,7 +91,14 @@ export default class BookDetail extends Component {
     }  
 
     addToCart(book){
-        this.props.addToCart(book)
+        if(this.props.cart.includes(book)){
+            this.setState({
+                header: 'go look at something else first'
+            })
+        }
+        else{
+            this.props.addToCart(book)
+        }
     }
 
     onCloseAlert() {

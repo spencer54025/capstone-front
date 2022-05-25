@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import { v4 } from 'uuid'
 
 
@@ -9,7 +10,8 @@ export default class Cart extends Component {
         this.state = {
             subTotal: 0,
             tax: 0,
-            total: 0
+            total: 0,
+            localCart: []
         }
 
         this.mapCartItems = this.mapCartItems.bind(this)
@@ -19,6 +21,18 @@ export default class Cart extends Component {
     componentDidMount() {
         this.mapCartItems()
         this.getTotal()
+        this.setState({
+            cart: this.props.cart
+        })
+    }
+
+    componentDidUpdate() {
+        if(this.state.localCart != this.props.cart){
+            this.getTotal()
+            this.setState({
+                localCart: this.props.cart
+            })
+        }
     }
 
     getTotal() {
@@ -46,8 +60,6 @@ export default class Cart extends Component {
 
     mapCartItems() {
         return this.props.cart.map(cartItem => {
-            var key = v4()
-            cartItem['key'] = key
             return(
                 <div className='cart-item-wrapper' key={cartItem.key}>
                 <div className='title-price-wrapper'>
@@ -55,7 +67,9 @@ export default class Cart extends Component {
                     <br></br>
                     <span>{cartItem.price}</span>
                 </div>
-                    <button onClick={() => this.props.removeItem(cartItem)}>Remove</button>
+                    <button onClick={() => {
+                        this.props.removeItem(cartItem)
+                    }}>Remove</button>
                 </div>
             )
         })
@@ -74,11 +88,17 @@ export default class Cart extends Component {
                         <span>tax: ${this.state.tax.toFixed(2)}</span> 
                         <span>shipping: ${this.state.shipping}</span>
                         <span>total: ${this.state.total}</span>
+                        {this.state.total > 0 ?
+                        <div className='checkout-wrapper'>
+                            <Link to='/checkout'>
+                                <button onClick={() => this.props.clearCart()}>Place Order</button>
+                            </Link>
+                        </div>
+                        :
+                        null
+                        }
                     </div>
 
-                    <div className='checkout-wrapper'>
-                        link
-                    </div>
                 </div>
             </div>
         )

@@ -7,6 +7,9 @@ import Contact from './contact'
 import BookDetail from './shop/book-detail'
 import Cart from './shop/cart'
 import AddBook from './admin-pages/add-book'
+import Checkout from './shop/checkout'
+import { v4 } from 'uuid'
+
 
 export default class App extends Component {
   constructor(props){
@@ -22,8 +25,15 @@ export default class App extends Component {
     this.addToCart = this.addToCart.bind(this)
     this.removeFromCart = this.removeFromCart.bind(this)
     this.logout = this.logout.bind(this)
+    this.clearCart = this.clearCart.bind(this)
   }
 
+
+  clearCart() {
+    this.setState({
+      cart: []
+    })
+  }
 
   removeFromCart(book) {
     this.setState({
@@ -33,7 +43,9 @@ export default class App extends Component {
     })
   }
 
-  addToCart(book){
+  addToCart(book){ 
+    const key = v4()
+    book['key'] = key
     this.setState({
       cart: [book].concat(this.state.cart)
     })
@@ -76,11 +88,12 @@ export default class App extends Component {
               <Route path='/contact' component={Contact} />
 
               <Route path='/cart' render={props => (
-                <Cart {...props} cart={this.state.cart} removeItem={this.removeFromCart}/>
+                <Cart {...props} cart={this.state.cart} clearCart={this.clearCart} removeItem={this.removeFromCart}/>
               )} />
               
               <Route path='/add-book' component={AddBook} />
 
+              <Route path='/checkout' component={Checkout} />
               
             </Switch>
         </Router>
