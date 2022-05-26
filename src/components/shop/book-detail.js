@@ -52,7 +52,7 @@ export default class BookDetail extends Component {
     saveEdit(event){
         axios({
             method: 'PUT',
-            url: `http://127.0.0.1:5000/update/book/${this.state.book.id}`,
+            url: `https://svp-capstone-back.herokuapp.com/update/book/${this.state.book.id}`,
             data: {
                 title: this.state.title,
                 summary: this.state.summary,
@@ -81,7 +81,7 @@ export default class BookDetail extends Component {
 
 
     deleteBook(book){
-        axios.delete(`http://127.0.0.1:5000/book/delete/${book.id}`)
+        axios.delete(`https://svp-capstone-back.herokuapp.com/book/delete/${book.id}`)
         .then(
             this.props.history.push('/')
         )
@@ -115,7 +115,7 @@ export default class BookDetail extends Component {
     }
 
     getBook() {
-        axios.get(`http://127.0.0.1:5000/book/get/${this.props.match.params.slug}`)
+        axios.get(`https://svp-capstone-back.herokuapp.com/book/get/${this.props.match.params.slug}`)
         .then(res => {
             this.setState({
                 book: res.data

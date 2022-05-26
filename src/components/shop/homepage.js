@@ -20,7 +20,7 @@ export default class HomePage extends Component {
       }
     
     getBooks() {
-        axios.get('http://127.0.0.1:5000/books/get')
+        axios.get('https://svp-capstone-back.herokuapp.com/books/get')
         .then(response =>{
             this.setState({
                 books: response.data

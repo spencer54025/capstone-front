@@ -24,7 +24,7 @@ export default class Login extends Component {
     }
 
     updatePassword(event) {
-        axios.put(`http://127.0.0.1:5000/user/update/${this.state.username3}/${this.state.email2}`, {
+        axios.put(`https://svp-capstone-back.herokuapp.com/user/update/${this.state.username3}/${this.state.email2}`, {
             password: this.state.password3
         })
         .then(res => {
@@ -58,7 +58,7 @@ export default class Login extends Component {
             })
         }
         else{
-        axios.post('http://127.0.0.1:5000/signup', {
+        axios.post('https://svp-capstone-back.herokuapp.com/signup', {
             username: this.state.username2,
             password: this.state.password2,
             email: this.state.email
@@ -97,7 +97,7 @@ export default class Login extends Component {
         : 
         axios({
             method: 'post',
-            url: 'http://127.0.0.1:5000/user/verify',
+            url: 'https://svp-capstone-back.herokuapp.com/user/verify',
             data: {
                 username: this.state.username1,
                 password: this.state.password1

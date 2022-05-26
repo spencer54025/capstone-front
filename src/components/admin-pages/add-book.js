@@ -28,7 +28,7 @@ export default class AddBook extends Component {
         book.append("title", this.state.summary)
         this.props.updateBooks(book)
         
-        axios.post('http://127.0.0.1:5000/book/add', {
+        axios.post('https://svp-capstone-back.herokuapp.com/book/add', {
             title: this.state.title,
             author: this.state.author,
             genre: this.state.genre,
