@@ -113,7 +113,6 @@ export default class BookDetail extends Component {
             setAlert: true
         })
     }
-    
 
     getBook() {
         axios.get(`http://127.0.0.1:5000/book/get/${this.props.match.params.slug}`)
@@ -131,7 +130,6 @@ export default class BookDetail extends Component {
         this.getBook()
     }
 
-
     render() {
         const {
             id,
@@ -142,7 +140,6 @@ export default class BookDetail extends Component {
             img,
             genre
         } = this.state.book
-
 
         return (
             <div className='single-book-wrapper'>
@@ -198,5 +195,4 @@ export default class BookDetail extends Component {
             </div>
         )
     }
-
 }

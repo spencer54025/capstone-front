@@ -25,6 +25,7 @@ export default class HomePage extends Component {
             this.setState({
                 books: response.data
             })
+
         })
         .catch(error =>{
             console.log(error)
@@ -34,6 +35,7 @@ export default class HomePage extends Component {
 
     mapBooks() {
         return this.state.books.map(book => {
+            book['quanity'] = 0
             return (
                 <div className='book-wrapper' key={book.id}>
                     <Link to={`/book/${book.id}`}>

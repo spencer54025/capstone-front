@@ -10,7 +10,6 @@ import AddBook from './admin-pages/add-book'
 import Checkout from './shop/checkout'
 import { v4 } from 'uuid'
 
-
 export default class App extends Component {
   constructor(props){
     super(props)
@@ -45,7 +44,6 @@ export default class App extends Component {
     })
   }
 
-
   clearCart() {
     this.setState({
       cart: []
@@ -60,9 +58,8 @@ export default class App extends Component {
     })
   }
 
-  addToCart(book){ 
-    const key = v4()
-    book['key'] = key
+  addToCart(book){
+    book['key'] = v4()
     this.setState({
       cart: [book].concat(this.state.cart)
     })
