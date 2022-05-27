@@ -50,18 +50,18 @@ export default class App extends Component {
     })
   }
 
-  removeFromCart(book) {
-    if(book.quantity > 1){
-      book.quantity = book.quantity - 1
+    removeFromCart(book) {
+        if(book.quantity > 1){
+          book.quantity = book.quantity - 1
+        }
+        else{
+        this.setState({
+          cart: this.state.cart.filter(item => {
+            return item.key !== book.key
+          })
+        })
+      }
     }
-    else{
-    this.setState({
-      cart: this.state.cart.filter(item => {
-        return item.key !== book.key
-      })
-    })
-  }
-  }
 
   addToCart(book){
     book['key'] = v4()
@@ -102,7 +102,10 @@ export default class App extends Component {
                />
 
               <Route path="/book/:slug" render={props => (
-                <BookDetail  {...props} removeFromBooks={this.removeFromBooks} cart={this.state.cart} userType={this.state.userType} loggedInStatus={this.state.loggedInStatus} addToCart={this.addToCart} />
+                <BookDetail  {...props}
+                  removeFromBooks={this.removeFromBooks} cart={this.state.cart}
+                  userType={this.state.userType} loggedInStatus={this.state.loggedInStatus}
+                  addToCart={this.addToCart} />
                 )}
               />
 

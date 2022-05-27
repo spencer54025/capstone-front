@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 
 
-
 export default class HomePage extends Component {
     constructor(props) {
         super(props)
@@ -11,27 +10,28 @@ export default class HomePage extends Component {
         this.state = {
             books: []
         }
-
         this.getBooks = this.getBooks.bind(this)
     }
 
-    componentDidMount() {
-        this.getBooks()
-      }
-    
     getBooks() {
         axios.get('https://svp-capstone-back.herokuapp.com/books/get')
         .then(response =>{
             this.setState({
                 books: response.data
             })
-
+    
         })
         .catch(error =>{
             console.log(error)
         })
-      }
+    }
 
+    componentDidMount() {
+        this.getBooks()
+        this.setState({
+            books: this.props.books
+        })
+      }
 
     mapBooks() {
         return this.state.books.map(book => {

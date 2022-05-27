@@ -70,7 +70,8 @@ export default class BookDetail extends Component {
                 genre: this.state.genre,
                 price: this.state.price,
                 summary: this.state.summary,
-                img: this.state.img
+                img: this.state.img,
+                book: res.data
             })
         })
         .catch(err => {
@@ -81,6 +82,7 @@ export default class BookDetail extends Component {
 
 
     deleteBook(book){
+        this.props.removeFromBooks(book)
         axios.delete(`https://svp-capstone-back.herokuapp.com/book/delete/${book.id}`)
         .then(
             this.props.history.push('/')
@@ -88,7 +90,6 @@ export default class BookDetail extends Component {
         .catch(err => {
             console.log(error)
         })
-        this.props.removeFromBooks(book)
     }  
 
     addToCart(book){
@@ -147,7 +148,10 @@ export default class BookDetail extends Component {
                 {this.props.userType === 'admin' ?
                 <div>
                     <h1>{title}</h1>
-                    <button onClick={() => this.deleteBook(this.state.book)}>
+                    <button onClick={() => { 
+                        this.deleteBook(this.state.book)
+                        this.props.getBooks
+                    }}>
                     <FontAwesomeIcon icon={faTrash} />
                     </button>
                     <button onClick={() => this.changeToEdit()}>
