@@ -32,7 +32,7 @@ export default class App extends Component {
 
   updateBooks(book) {
     this.setState({
-      books: books.concat(book)
+      books: this.state.books.concat(book)
     })
   }
 

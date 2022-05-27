@@ -105,6 +105,7 @@ export default class Login extends Component {
         })
         .then(response => {
             if(response.data[0] === "user was verified"){
+                console.log(response.data)
                 this.props.successfulLogin(response.data[2])
                 this.setState({
                     username1: '',

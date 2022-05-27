@@ -11,7 +11,8 @@ export default class AddBook extends Component {
             genre: '',
             price: '',
             summary: '',
-            img: ''
+            img: '',
+            message: ''
         }
 
         this.handleChange = this.handleChange.bind(this)
@@ -19,13 +20,19 @@ export default class AddBook extends Component {
     }
 
     addBook(event) {
-        let book = {}
-        book.append("title", this.state.title)
-        book.append("title", this.state.author)
-        book.append("title", this.state.genre)
-        book.append("title", this.state.price)
-        book.append("title", this.state.img)
-        book.append("title", this.state.summary)
+        if(this.state.title == '' || this.state.author == '' || this.state.genre == '' || this.state.price.isInteger == false || this.state.summary == '' || this.state.img == ''){
+            this.setState({
+                message: "all fields need to be filled and price only contains numbers"
+            })
+        }
+        else{
+        let book = []
+        book['title'] = this.state.title
+        book['author'] = this.state.author
+        book['genre'] = this.state.genre
+        book['price'] = this.state.price
+        book['img'] = this.state.img
+        book['summary'] = this.state.summary
         this.props.updateBooks(book)
         
         axios.post('https://svp-capstone-back.herokuapp.com/book/add', {
@@ -50,7 +57,8 @@ export default class AddBook extends Component {
         .catch(error => {
             console.log(error)
         })
-        event.preventDefault()
+    }
+    event.preventDefault()
     }
 
     handleChange(event) {
@@ -62,6 +70,7 @@ export default class AddBook extends Component {
     render(){
         return(
             <div>
+            <h1 style={{ width: '100%', height: '50px'}}>{this.state.message}</h1>
                 <form onSubmit={this.addBook} className='form-wrapper'>
                     <input type="text" name='title' placeholder='Title' value={this.state.title} onChange={this.handleChange} />
                     <input type="text" name='author' placeholder='Author' value={this.state.author} onChange={this.handleChange} />
