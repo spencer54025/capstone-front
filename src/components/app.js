@@ -51,11 +51,16 @@ export default class App extends Component {
   }
 
   removeFromCart(book) {
+    if(book.quantity > 1){
+      book.quantity = book.quantity - 1
+    }
+    else{
     this.setState({
       cart: this.state.cart.filter(item => {
         return item.key !== book.key
       })
     })
+  }
   }
 
   addToCart(book){

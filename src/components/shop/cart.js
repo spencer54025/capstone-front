@@ -37,7 +37,7 @@ export default class Cart extends Component {
     getTotal() {
         let priceOfBooks = 0
         this.props.cart.forEach(book => {
-            priceOfBooks = priceOfBooks + book.price
+            priceOfBooks = priceOfBooks + (book.price * book.quantity)
         })
         if(priceOfBooks > 35 || priceOfBooks == 0){   
             this.setState({
@@ -64,10 +64,11 @@ export default class Cart extends Component {
                 <div className='title-price-wrapper'>
                     <span>{cartItem.title}</span>
                     <br></br>
-                    <span>{cartItem.price}</span>
+                    <span>{cartItem.price} x {cartItem.quantity}</span>
                 </div>
                     <button onClick={() => {
                         this.props.removeItem(cartItem)
+                        this.getTotal()
                     }}>Remove</button>
                 </div>
             )

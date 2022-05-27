@@ -92,10 +92,9 @@ export default class BookDetail extends Component {
     }  
 
     addToCart(book){
+        book['quantity'] = 1
         if(this.props.cart.includes(book)){
-            this.setState({
-                header: 'go look at something else first'
-            })
+            book.quantity = book.quantity + 1
         }
         else{
             this.props.addToCart(book)
